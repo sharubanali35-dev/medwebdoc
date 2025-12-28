@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Available Medicines</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<script>
+fetch("https://docs.google.com/spreadsheets/d/1dhwvFt3N2gfSITiYylhyvJ0eLfS_uq-QojFTuT9uPKI/edit?usp=sharing")
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById("productList");
+    container.innerHTML = "";
+
+    data.forEach(p => {
+      container.innerHTML += `
+        <div class="product-card">
+          <img src="images/${p.image}" alt="${p.name}">
+          <h3>${p.name}</h3>
+          <p>Category: ${p.category}</p>
+          ${p.prescription === "yes" ? "<span class='prescription'>Prescription Required</span>" : ""}
+          <button>Order on WhatsApp</button>
+        </div>
+      `;
+    });
+  });
+</script>
+<body>
+
+<header>
+  <h1>Available Medicines</h1>
+  <p>Search medicines & order on WhatsApp</p>
+</header>
+
+<input
+  type="text"
+  id="searchInput"
+  placeholder="Search medicines..."
+  onkeyup="searchProducts()"
+  autocomplete="off"
+/>
+
+<script>
+function searchProducts() {
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  let cards = document.getElementsByClassName("product-card");
+
+  for (let i = 0; i < cards.length; i++) {
+    let text = cards[i].innerText.toLowerCase();
+    if (text.includes(input)) {
+      cards[i].style.display = "block";
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+}
+</script>
+
+
+
+<div class="filter-bar">
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('pain')">Pain Relief</button>
+  <button onclick="filterCategory('fever')">Fever</button>
+  <button onclick="filterCategory('antibiotic')">Antibiotic</button>
+  <button onclick="filterCategory('baby')">Baby Care</button>
+  <button onclick="filterCategory('health')">Health Products</button>
+</div>
+
+   <div class="product-card popular-card">
+
+   <div class="product-card" data-category="tablets">
+      <h3>Paracetamol</h3>
+      <p>Category: Tablets</p>
+
+      <button 
+        onclick="orderOnWhatsApp('Paracetamol','Tablets')" 
+        class="order-btn">
+        Order on WhatsApp
+      </button>
+    </div>
+
+    <div class="product-card" data-category="tablets">
+      <span class="rx-tag">Prescription Required</span>
+      <h3>Azithromycin</h3>
+      <p>Category: Tablets</p>
+
+      <button 
+        onclick="orderOnWhatsApp('Azithromycin','Tablets')" 
+        class="order-btn">
+        Order on WhatsApp
+      </button>
+    </div>
+
+    <div class="product-card" data-category="baby">
+      <h3>Baby Shampoo</h3>
+      <p>Category: Baby Care</p>
+
+      <button 
+        onclick="orderOnWhatsApp('Baby Shampoo','Baby Care')" 
+        class="order-btn">
+        Order on WhatsApp
+      </button>
+    </div>
+
+  </div>
+</section>
+
+  <h2 class="all-products-heading">All Products</h2>
+  
+ <src="images/medicine.png" alt="Medicine" class="product-img">
+<section class="product-grid" id="productList">
+  
+  <div class="product-card" data-category="fever & pain">
+    <span class="stock out">Out of Stock</span>
+  <h3>Paracetamol</h3>
+
+  <p class="meta">Use for: Fever & Pain</p>
+  <p class="meta">Strength: 500mg</p>
+  <p class="meta">Type: Tablet</p>
+
+  <p class="price-text">Price available on WhatsApp</p>
+
+  <a href="https://wa.me/916398484253?text=I want to order Paracetamol 500mg" target="_blank">
+    <button>Order on WhatsApp</button>
+  </a>
+
+</div>
+
+<div class="product-card" data-category="infection">
+  <span class="stock available">Available</span>
+  <span class="rx-tag">Prescription Required</span>
+
+  <h3>Azithromycin</h3>
+
+  <p class="meta">Use for: Infection</p>
+  <p class="meta">Strength: 500mg</p>
+  <p class="meta">Type: Tablet</p>
+  
+  <p class="price-text">Price available on WhatsApp</p>
+  
+  <a href="https://wa.me/916398484253?text=I want to order Azithromycin" target="_blank">
+    <button>Order on WhatsApp</button>
+  </a>
+
+</div>
+
+<div class="product-card" data-category="baby care">
+  <span class="stock available">Available</span>
+  <span class="rx-tag">Prescription Required</span>
+
+  <h3>Baby shampoo</h3>
+
+  <p class="meta">Use for: hairs</p>
+  <p class="meta">Type: Baby care</p>
+      
+  <p class="price-text">Starting from ₹199</p>
+
+  <a href="https://wa.me/916398484253?text=I want to order Baby Shampoo" target="_blank">
+    <button>Order on WhatsApp</button>
+  </a>
+</div>
+  
+<div class="product-card" data-category="Body pain">
+  <span class="stock limited">Limited Stock</span>
+ <span class="rx-tag">Prescription Required</span>
+
+  <h3>crocin</h3>
+
+  <p class="meta">Use for: Body pain</p>
+  <p class="meta">Strength: 500mg</p>
+  <p class="meta">Type: syrup</p>
+    
+    <p class="price-text">Price available on WhatsApp</p>
+  
+  <a href="https://wa.me/916398484253?text=I want to order crocin" target="_blank">
+    <button>Order on WhatsApp</button>
+  </a>
+</div>
+
+<div class="product-card" data-category="cough">
+  <span class="stock limited">Limited Stock</span>
+ <span class="rx-tag">Prescription Required</span>
+
+  <h3>cough syrup</h3>
+
+  <p class="meta">Use for: Cough</p>
+  <p class="meta">Strength: 10 to 100mg</p>
+  <p class="meta">Type: syrup</p>
+  
+  <a href="https://wa.me/916398484253?text=I want to order cough syrup" target="_blank">
+    <button>Order on WhatsApp</button>
+  </a>
+</div>
+
+  <div class="product-card" data-category="weakness">
+    <span class="stock available">Available</span>
+  <span class="rx-tag">Prescription Required</span>
+
+  <h3>vitamin syrup</h3>
+
+  <p class="meta">Use for: weekness </p>
+  <p class="meta">Strength: 1 1o 10mg</p>
+  <p class="meta">Type: syrup</p>
+
+  <p class="price-text">Price available on WhatsApp</p>
+  
+<a href="https://wa.me/916398484253?text=I want to order vitamin syrup" target="_blank">
+    <button>Order on WhatsApp</button>
+  </a>
+</div>
+
+  <div class="product-card" data-category="device">
+    <span class="stock limited">Limited Stock</span>
+   <span class="rx-tag">Prescription Required</span>
+
+  <h3>thermometer</h3>
+
+  <p class="meta">Use for: Measure temprature</p>
+  <p class="meta">Type: device</p>
+
+<p class="price-text">Starting from ₹199</p>
+
+<a href="https://wa.me/916398484253?text=I want to order thermometer" target="_blank">
+    <button>Order on WhatsApp</button>
+  </a>
+</div>
+
+
+</section>
+
+<section>
+  <p style="font-weight:bold;">
+    ⚠ Prescription required for certain medicines.  
+    Order via WhatsApp.
+  </p>
+<p class="note">
+  ⚠️ Some medicines may require a valid doctor’s prescription.
+</p>
+  <a href="order.html">
+    <button>Order Medicines Online</button>
+  </a>
+</section>
+
+<footer>
+  <p>© 2025 City Medical Store</p>
+</footer>
+
+<script>
+function searchProducts() {
+  let input = document.getElementById("searchInput").value.toLowerCase();
+  let cards = document.getElementsByClassName("product-card");
+  let found = false;
+
+  for (let i = 0; i < cards.length; i++) {
+    let text = cards[i].innerText.toLowerCase();
+    if (text.includes(input)) {
+      cards[i].style.display = "block";
+      found = true;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+
+  document.getElementById("noResult").style.display = found ? "none" : "block";
+}
+
+function filterCategory(category) {
+  let cards = document.getElementsByClassName("product-card");
+  let buttons = document.querySelectorAll(".filter-bar button");
+  let found = false;
+
+  /* active button highlight */
+  buttons.forEach(btn => btn.classList.remove("active"));
+  event.target.classList.add("active");
+
+  for (let i = 0; i < cards.length; i++) {
+    if (category === "all" || cards[i].dataset.category === category) {
+      cards[i].style.display = "block";
+      found = true;
+    } else {
+      cards[i].style.display = "none";
+    }
+  }
+
+  document.getElementById("noResult").style.display = found ? "none" : "block";
+}
+
+/* page load */
+document.querySelector(".filter-bar button").classList.add("active");
+filterCategory("all");
+</script>
+
+  
+

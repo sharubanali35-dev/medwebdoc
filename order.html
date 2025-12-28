@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Medicines</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2e8b57;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      background: #2e8b57;
+      color: white;
+      border: none;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Order Medicines</h2>
+
+  <form onsubmit="sendOrder(); return false;">
+    <p style="font-size:14px; margin-top:10px; text-align:center;">
+    After sending order, please upload prescription on WhatsApp.
+    </p>
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <textarea id="address" placeholder="Delivery Address" required></textarea>
+    <textarea id="medicine" placeholder="Medicine Name / Details" required></textarea>
+
+    <button type="submit">Send Order</button>
+  </form>
+</div>
+
+<script>
+function sendOrder() {
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+  let medicine = document.getElementById("medicine").value;
+
+  let message =
+  "🟢 New Medicine Order%0A%0A" +
+  "👤 Name: " + name + "%0A" +
+  "📞 Phone: " + phone + "%0A" +
+  "🏠 Address: " + address + "%0A" +
+  "💊 Medicine Details: " + medicine + "%0A%0A" +
+  "📄 Please send prescription photo here.";
+
+
+  let whatsappNumber = "916398484253"; // medical store number
+
+  window.open(
+    "https://wa.me/" + whatsappNumber + "?text=" + message,
+    "_blank"
+  );
+}
+</script>
+
+</body>
+</html>
